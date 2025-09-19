@@ -1,0 +1,30 @@
+/* Add this to App.css and remove the old .bg-[...] shadow rules */
+
+.bg-dots {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='2' cy='2' r='2' fill='%23e5e7eb'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  opacity: 1;
+}
+
+.card-neu-shadow {
+  --shadow-dark: color-mix(in srgb, var(--card-bg-hex, #FFFFFF), black 35%);
+
+  /* Multiple box-shadows stacked */
+  box-shadow:
+    0 0 0 0px var(--shadow-dark),   /* Thin outline around the card */
+    7px 7px 0 0 var(--shadow-dark); /* The main "blocky" shadow */
+    
+  
+  transition: box-shadow 0.2s ease-in-out, transform 0.2s ease-in-out;
+}
+
+.card-neu-shadow:hover {
+  box-shadow:
+    0 0 0 0px var(--shadow-dark),   /* Keep outline on hover */
+    2px 2px 0 0 var(--shadow-dark); /* Smaller offset shadow */
+  transform: translate(2px, 2px);
+}
