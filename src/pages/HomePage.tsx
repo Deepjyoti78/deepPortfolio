@@ -108,8 +108,6 @@ const initialPortfolioItems = [
 const HomePage: React.FC = () => {
   const [items, setItems] = useState(initialPortfolioItems);
   const gridContainerRef = useRef(null);
-
-  // State and effect to detect touch device for disabling drag on mobile
   const [isTouchDevice, setIsTouchDevice] = useState(false);
 
   useEffect(() => {
@@ -117,7 +115,6 @@ const HomePage: React.FC = () => {
     setIsTouchDevice(checkForTouch());
   }, []);
 
-  // Function to handle reordering
   const handleMove = (itemId: number, direction: 'up' | 'down') => {
     const index = items.findIndex((item) => item.id === itemId);
     if (index === -1) return;
@@ -128,7 +125,6 @@ const HomePage: React.FC = () => {
     setItems(newItems);
   };
 
-  // Function to render the correct card component
   const renderCard = (item: any) => {
     if (item.skillsData) return <SkillsCard {...item} />;
     if (item.educationData) return <EducationCard {...item} />;
@@ -139,7 +135,8 @@ const HomePage: React.FC = () => {
   };
 
   return (
-    <div className="relative z-10 mx-auto max-w-[1000px] px-4 py-24 sm:px-6 lg:px-8">
+    // --- CHANGE: Reduced max-width from 1000px to 900px to make the layout smaller ---
+    <div className="relative z-10 mx-auto max-w-[900px] px-4 py-24 sm:px-6 lg:px-8">
       <div ref={gridContainerRef} className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-5">
         {items.map((item, index) => (
           <motion.div
@@ -147,10 +144,7 @@ const HomePage: React.FC = () => {
             className={`relative ${item.colSpan || ''} ${item.rowSpan || ''}`}
             layout
             transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-            
-            // This is the fix: Only enable drag on non-touch devices
             drag={!isTouchDevice} 
-            
             dragConstraints={gridContainerRef}
             dragSnapToOrigin
             whileDrag={{ scale: 1.05, zIndex: 50, cursor: 'grabbing' }}
