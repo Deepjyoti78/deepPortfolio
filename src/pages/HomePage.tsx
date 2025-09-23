@@ -140,7 +140,7 @@ const HomePage: React.FC = () => {
 
   return (
     <div className="relative z-10 mx-auto max-w-[1000px] px-4 py-24 sm:px-6 lg:px-8">
-      <div ref={gridContainerRef} className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-6">
+      <div ref={gridContainerRef} className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-5">
         {items.map((item, index) => (
           <motion.div
             key={item.id}
